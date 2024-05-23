@@ -19,12 +19,22 @@ public class ItemService {
             new Item("AirPods", 350_000)
     );
 
+    // client 쪽에서 같은 path로서 쿼리스트링으로 전달한 데이터를 받아와 비교
     public Item getCallObject(String query) {
+        for (Item item : itemList) {
+            if(item.getTitle().equals(query)) {
+                return item;
+            }
+        }
         return null;
     }
 
     public ItemResponseDto getCallList() {
-        return null;
+        ItemResponseDto responseDto = new ItemResponseDto();
+        for (Item item : itemList) {
+            responseDto.setItems(item);
+        }
+        return responseDto;
     }
 
     public Item postCall(String query, UserRequestDto requestDto) {
